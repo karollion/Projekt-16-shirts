@@ -1,8 +1,8 @@
 import styles from './Product.module.scss';
-import clsx from 'clsx';
-import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import ProductImage from './ProductImage/ProductImage';
+import ProductForm from './ProductForm/ProductForm';
 
 const Product = props => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
@@ -18,7 +18,7 @@ const Product = props => {
     );
   };
 
-  const cart = e => {
+  const addToCart = e => {
     e.preventDefault();
 
     console.log('SUMMARY');
@@ -31,46 +31,28 @@ const Product = props => {
 
   return (
     <article className={styles.product}>
-      <div className={styles.imageContainer}>
-        <img 
-          className={styles.image}
-          alt={props.title}
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-${props.name}--${currentColor}.jpg`} />
-      </div>
+      <ProductImage title={props.title} name={props.name} currentColor={currentColor} />
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form onSubmit={cart} >
-          <div className={styles.sizes}>
-            <h3 className={styles.optionLabel}>Sizes</h3>
-            <ul className={styles.choices}>
-              {props.sizes.map((size) => (<li key={size}><button  onClick={(e) => setCurrentSize(size)} type='button' className={clsx(size.name === currentSize.name && styles.active)}>{size.name}</button></li>))}
-            </ul>
-          </div>
-          <div className={styles.colors}>
-            <h3 className={styles.optionLabel}>Colors</h3>
-            <ul className={styles.choices}>
-              {props.colors.map((item) => (<li key={item}><button onClick={(e) => setCurrentColor(item)}type="button" className={clsx(prepareColorClassName(item), item === currentColor && styles.active)} /></li>))}
-            </ul>
-          </div>
-          <Button className={styles.button}>
-            <span className="fa fa-shopping-cart" />
-          </Button>
-        </form>
+        <ProductForm sizes={props.sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} 
+                    colors={props.colors} currentColor={currentColor} setCurrentColor={setCurrentColor} 
+                    addToCart={addToCart} prepareColorClassName={prepareColorClassName} />
+        
       </div>
     </article>
   )
 };
 
 Product.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  title: PropTypes.string,
-  basePrice: PropTypes.number,
-  colors: PropTypes.array,
-  sizes:  PropTypes.array,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  basePrice: PropTypes.number.isRequired,
+  colors: PropTypes.array.isRequired,
+  sizes:  PropTypes.array.isRequired,
 };
 
 export default Product;
