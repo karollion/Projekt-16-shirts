@@ -4,9 +4,9 @@ import { useState } from 'react';
 import ProductImage from './ProductImage/ProductImage';
 import ProductForm from './ProductForm/ProductForm';
 
-const Product = props => {
-  const [currentColor, setCurrentColor] = useState(props.colors[0]);
-  const [currentSize, setCurrentSize] = useState(props.sizes[0]);
+const Product = ({name, title, basePrice, colors, sizes}) => {
+  const [currentColor, setCurrentColor] = useState(colors[0]);
+  const [currentSize, setCurrentSize] = useState(sizes[0]);
 
   const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
@@ -14,7 +14,7 @@ const Product = props => {
 
   const getPrice = () => {
     return (
-      props.basePrice + currentSize.additionalPrice
+      basePrice + currentSize.additionalPrice
     );
   };
 
@@ -23,7 +23,7 @@ const Product = props => {
 
     console.log('SUMMARY');
     console.log('=======');
-    console.log('Name: ' + props.title);
+    console.log('Name: ' + title);
     console.log('Price: ' + getPrice());
     console.log('Size: ' + currentSize.name);
     console.log('Color: ' + currentColor);
@@ -31,23 +31,21 @@ const Product = props => {
 
   return (
     <article className={styles.product}>
-      <ProductImage title={props.title} name={props.name} currentColor={currentColor} />
+      <ProductImage title={title} name={name} currentColor={currentColor} />
       <div>
         <header>
-          <h2 className={styles.name}>{props.title}</h2>
+          <h2 className={styles.name}>{title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <ProductForm sizes={props.sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} 
-                    colors={props.colors} currentColor={currentColor} setCurrentColor={setCurrentColor} 
+        <ProductForm sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} 
+                    colors={colors} currentColor={currentColor} setCurrentColor={setCurrentColor} 
                     addToCart={addToCart} prepareColorClassName={prepareColorClassName} />
-        
       </div>
     </article>
   )
 };
 
 Product.propTypes = {
-  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   basePrice: PropTypes.number.isRequired,
