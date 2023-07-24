@@ -1,8 +1,9 @@
 import styles from './Product.module.scss';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ProductImage from './ProductImage/ProductImage';
 import ProductForm from './ProductForm/ProductForm';
+
 
 const Product = ({name, title, basePrice, colors, sizes}) => {
   const [currentColor, setCurrentColor] = useState(colors[0]);
@@ -13,11 +14,11 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
   };
 
-  const getPrice = () => {
+  const getPrice = useMemo(() => {
     return (
       basePrice + currentSize.additionalPrice
     );
-  };
+  }, [currentSize, basePrice]);
 
   const addToCart = e => {
     e.preventDefault();
@@ -38,7 +39,7 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>Price: {getPrice()}$</span>
+          <span className={styles.price}>Price: {getPrice}$</span>
         </header>
         <ProductForm sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} 
                     colors={colors} currentColor={currentColor} setCurrentColor={setCurrentColor} 
