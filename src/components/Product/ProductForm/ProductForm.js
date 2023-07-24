@@ -4,6 +4,7 @@ import OptionColor from './OptionColor/OptionColor';
 import OptionSize from './OptionSize/OptionSize';
 
 const ProductForm = ({addToCart, sizes, currentSize, setCurrentSize, colors, currentColor, setCurrentColor, prepareColorClassName}) => {
+  console.log("ProductForm: " , currentColor);
   return (
     <form onSubmit={addToCart} >
       <OptionSize sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} />

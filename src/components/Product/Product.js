@@ -29,6 +29,8 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
     console.log('Color: ' + currentColor);
   };
 
+  console.log("Product: " , currentColor);
+
   return (
     <article className={styles.product}>
       <ProductImage title={title} name={name} currentColor={currentColor} />

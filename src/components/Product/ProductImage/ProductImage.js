@@ -2,6 +2,7 @@ import styles from './ProductImage.module.scss';
 import PropTypes from 'prop-types';
 
 const ProductImage = ({name, title, currentColor}) => {
+  console.log("ProductImage: " , currentColor);
   return (
     <div className={styles.imageContainer}>
       <img 
@@ -15,7 +16,7 @@ const ProductImage = ({name, title, currentColor}) => {
 ProductImage.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  CurrentColor: PropTypes.string.isRequired,
+  currentColor: PropTypes.string.isRequired,
 };
 
 export default ProductImage;
