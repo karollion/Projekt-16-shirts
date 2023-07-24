@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
 const OptionColor = ({colors, currentColor, setCurrentColor, prepareColorClassName}) => {
-  console.log("OptionColor: " , currentColor);
+  console.log("OptionColor: " , currentColor, 'Funkcja klasy:',  prepareColorClassName('white'));
+
   return (
     <div className={styles.colors}>
       <h3 className={styles.optionLabel}>Colors</h3>

@@ -9,6 +9,7 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
   const [currentSize, setCurrentSize] = useState(sizes[0]);
 
   const prepareColorClassName = color => {
+    console.log('Funkcja kolory', color, 'color' + color[0].toUpperCase() + color.substr(1).toLowerCase() );
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
   };
 
