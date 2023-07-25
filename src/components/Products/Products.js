@@ -8,7 +8,7 @@ const Products = () => {
   return (
     /* transfer of all parameters to the module */
     <section>
-      {products.map((product) => <Product {...product} />)}; 
+      {products.map((product) => <Product key={product.id} {...product} />)}; 
     </section>
   );
 };
