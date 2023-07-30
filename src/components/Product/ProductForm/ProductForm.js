@@ -4,12 +4,11 @@ import OptionColor from './OptionColor/OptionColor';
 import OptionSize from './OptionSize/OptionSize';
 import PropTypes from 'prop-types';
 
-const ProductForm = ({addToCart, sizes, currentSize, setCurrentSize, colors, currentColor, setCurrentColor, prepareColorClassName}) => {
-  console.log("ProductForm: " , currentColor);
+const ProductForm = ({addToCart, sizes, currentSize, setCurrentSize, colors, currentColor, setCurrentColor}) => {
   return (
     <form onSubmit={addToCart} >
       <OptionSize sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} />
-      <OptionColor colors={colors} currentColor={currentColor} setCurrentColor={setCurrentColor} prepareColorClassName={prepareColorClassName} />
+      <OptionColor colors={colors} currentColor={currentColor} setCurrentColor={setCurrentColor} />
       <Button className={styles.button}><span className="fa fa-shopping-cart" /></Button>
     </form>
   );
@@ -21,7 +20,6 @@ ProductForm.propTypes = {
   currentSize: PropTypes.object.isRequired,
   setCurrentSize: PropTypes.func.isRequired,
   colors: PropTypes.array.isRequired,
-  prepareColorClassName: PropTypes.func.isRequired,
   currentColor: PropTypes.string.isRequired,
   setCurrentColor: PropTypes.func.isRequired
 };

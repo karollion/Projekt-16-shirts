@@ -9,11 +9,7 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizes[0]);
 
-  const prepareColorClassName = color => {
-    console.log('Funkcja kolory', color, 'color' + color[0].toUpperCase() + color.substr(1).toLowerCase() );
-    return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
-  };
-
+  
   const getPrice = useMemo(() => {
     return (
       basePrice + currentSize.additionalPrice
@@ -26,12 +22,10 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
     console.log('SUMMARY');
     console.log('=======');
     console.log('Name: ' + title);
-    console.log('Price: ' + getPrice());
+    console.log('Price: ' + getPrice);
     console.log('Size: ' + currentSize.name);
     console.log('Color: ' + currentColor);
   };
-
-  console.log("Product: " , currentColor);
 
   return (
     <article className={styles.product}>
@@ -43,7 +37,7 @@ const Product = ({name, title, basePrice, colors, sizes}) => {
         </header>
         <ProductForm sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} 
                     colors={colors} currentColor={currentColor} setCurrentColor={setCurrentColor} 
-                    addToCart={addToCart} prepareColorClassName={prepareColorClassName} />
+                    addToCart={addToCart}/>
       </div>
     </article>
   )
